@@ -1,28 +1,36 @@
-// src/components/NumberOfEvents.js
+import { useState } from "react"
+import PropTypes from 'prop-types'
 
-import { useState } from "react";
+const NumberOfEvents = ({ setCurrentNOE }) => {
+    const [number, setNumber] = useState(32)
 
-const NumberOfEvents = ({ }) => {
 
-    const [number, setNumber] = useState(32);
+    const handleInputChanged = (e) => {
+        let value = e.target.value
+        console.log('value', value)
+        if (value < 1) {
+            return setNumber('')
+        }
 
-    const handleInputChanged = (event) => {
-        const value = event.target.value;
-        setNumber(value);
+        setCurrentNOE(value)
+        setNumber(value)
     }
 
     return (
-        <div id="number-of-events">
-            <label htmlFor="number-of-events-input">Number of Events: </label>
+        <div id="numberOfevents">
+            <label>Number of Events:</label>
             <input
                 type="text"
-                id="number-of-events-input"
-                className="number-of-events-input"
+                className="number"
                 value={number}
                 onChange={handleInputChanged}
             />
         </div>
-    );
+    )
 }
 
-export default NumberOfEvents;
+export default NumberOfEvents
+
+NumberOfEvents.propTypes = {
+    setCurrentNOE: PropTypes.func.isRequired
+}
